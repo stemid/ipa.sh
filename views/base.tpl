@@ -95,10 +95,10 @@
     <div class="container">
       <div class="row">
         <div class="one-half column">
-          <h3>More info</h3>
-          <div class="one-half column phones page-content">
-            {{!base}}
-          </div>
+          <h3 id="more">More info</h3>
+        </div>
+        <div id="ip-info" class="one-half column table-content">
+          {{!base}}
         </div>
       </div>
     </div>

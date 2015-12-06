@@ -4,7 +4,7 @@ from configparser import RawConfigParser
 import user_agents
 from bottle import route, default_app, debug, request, run, response, template
 from bottle import TEMPLATE_PATH, static_file
-from ipwhois import IPWhois
+from pygeoip import GeoIP
 
 config = RawConfigParser()
 config.readfp(open('ipash.cfg'))
@@ -56,13 +56,12 @@ def index():
             return res_data['ip'] + '\r\n'
 
     try:
-        whois = IPWhois(client_ip)
-        whois_res = whois.lookup()
-        res_data['whois'] = whois_res
+        ip = GeoIP(config.get('app', 'geoip_database'))
+        res_data['country'] = ip.country_name_by_addr(client_ip)
+        res_data['city'] = ip.record_by_addr(client_ip)
+        res_data['asn'] = ip.asn_by_addr(client_ip)
     except Exception as e:
-        if not user_agent:
-            response.status = 500
-            return json.dumps({'error': str(e)})
+        pass
 
     if user_agent and verbose:
         if user_agent.browser.family == 'Other':
