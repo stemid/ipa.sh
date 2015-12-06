@@ -83,15 +83,28 @@
   <div class="section hero">
     <div class="container">
       <div class="row">
-        <div class="one-half column">
-          <h4 class="hero-heading">Your IP-address is</h4>
-        </div>
-        <div class="one-half column phones page-content">
-          {{!base}}
+        <div class="column">
+          <h4 class="hero-heading">{{page_title}}</h4>
         </div>
       </div>
     </div>
   </div>
+
+  % if verbose:
+  <div class="section table">
+    <div class="container">
+      <div class="row">
+        <div class="one-half column">
+          <h3>More info</h3>
+          <div class="one-half column phones page-content">
+            {{!base}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  % end
+
 
 </body>
 </html>

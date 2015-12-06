@@ -24,11 +24,21 @@ def serve_static(filename):
 @route('/')
 def index():
     res_data = {}
+    verbose = False
+    prettyprint = False
+
     try:
         client_ip = request.remote_route[0]
     except:
         client_ip = request.environ['REMOTE_ADDR']
         pass
+
+    args = request.query_string.split('&')
+    if 'v' in args:
+        verbose = True
+
+    if 'pp' in args:
+        prettyprint = True
 
     res_data['ip'] = client_ip
 
@@ -40,7 +50,7 @@ def index():
         user_agent = False
         pass
 
-    if user_agent and request.query_string != 'v':
+    if user_agent and not verbose:
         if user_agent.browser.family == 'Other':
             response.set_header('Content-type', 'text/plain')
             return res_data['ip'] + '\r\n'
@@ -54,15 +64,22 @@ def index():
             response.status = 500
             return json.dumps({'error': str(e)})
 
-    if request.query_string == 'v':
-        if user_agent:
-            if user_agent.browser.family == 'Other':
-                response.set_header('Content-type', 'application/json')
-                return json.dumps(res_data)
+    if user_agent and verbose:
+        if user_agent.browser.family == 'Other':
+            response.set_header('Content-type', 'application/json')
+            if prettyprint:
+                return json.dumps(
+                    res_data,
+                    sort_keys=True,
+                    indent=4,
+                    separators=(',', ': ')
+                ) + '\r\n'
+            return json.dumps(res_data)
 
     return template('index', 
                     ua_info=res_data,
-                    page_title='Your IP-address is ' + res_data['ip']
+                    page_title='Your IP-address is: ' + res_data['ip'],
+                    verbose=verbose
                    )
 
 if __name__ == '__main__':
