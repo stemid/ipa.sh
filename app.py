@@ -40,7 +40,7 @@ def index():
         user_agent = False
         pass
 
-    if user_agent:
+    if user_agent and request.query_string != 'v':
         if user_agent.browser.family == 'Other':
             response.set_header('Content-type', 'text/plain')
             return res_data['ip'] + '\r\n'
