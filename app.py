@@ -41,7 +41,7 @@ def index():
         res_data['whois'] = whois_res
     except Exception as e:
         if not user_agent:
-            response.status_code = 500
+            response.status = 500
             return json.dumps({'error': str(e)})
 
     if request.query_string == 'v':
