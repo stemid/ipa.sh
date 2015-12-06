@@ -20,10 +20,12 @@ See examples for gunicorn and apache2 configurations.
 
 # Usage
 
-  curl ipa.sh
-  99.99.99.91
+Can be used in terminal from any Linux host.
 
-  curl 'ipa.sh/?v&pp'
-  {'pretty json output'}
+    curl ipa.sh
+    99.99.99.91
+
+    curl 'ipa.sh/?v&pp'
+    {'pretty json output'}
 
 Those are the only two arguments available. _v_ also provides more output in browser mode. 
