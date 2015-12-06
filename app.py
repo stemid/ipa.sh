@@ -24,7 +24,10 @@ def serve_static(filename):
 @route('/')
 def index():
     res_data = {}
-    client_ip = request.environ['REMOTE_ADDR']
+    try:
+        client_ip = request.environ['X-Forwarded-For']
+    except:
+        client_ip = request.environ['REMOTE_ADDR']
     res_data['ip'] = client_ip
 
     try:
