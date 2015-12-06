@@ -32,31 +32,31 @@ def index():
 
     res_data['ip'] = client_ip
 
-    try:
-        ua = request.environ['HTTP_USER_AGENT']
-        user_agent = user_agents.parse(ua)
-        res_data['user_agent'] = str(user_agent)
-    except Exception as e:
-        user_agent = False
-        pass
-
-    try:
-        whois = IPWhois(client_ip)
-        whois_res = whois.lookup()
-        res_data['whois'] = whois_res
-    except Exception as e:
-        if not user_agent:
-            response.status = 500
-            return json.dumps({'error': str(e)})
-
     if request.query_string == 'v':
+        try:
+            ua = request.environ['HTTP_USER_AGENT']
+            user_agent = user_agents.parse(ua)
+            res_data['user_agent'] = str(user_agent)
+        except Exception as e:
+            user_agent = False
+            pass
+
+        try:
+            whois = IPWhois(client_ip)
+            whois_res = whois.lookup()
+            res_data['whois'] = whois_res
+        except Exception as e:
+            if not user_agent:
+                response.status = 500
+                return json.dumps({'error': str(e)})
+
         response.set_header('Content-type', 'application/json')
         return json.dumps(res_data)
 
     if user_agent:
         if user_agent.browser.family == 'Other':
             response.set_header('Content-type', 'text/plain')
-            return client_ip + '\r\n'
+            return res_data['ip'] + '\r\n'
 
     return template('index', 
                     ua_info=res_data,
