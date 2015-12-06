@@ -1,5 +1,6 @@
 bottle==0.12.9
 dnspython3==1.12.0
+gunicorn==19.4.1
 ipwhois==0.11.0
 ua-parser==0.5.1
 user-agents==1.0.1
