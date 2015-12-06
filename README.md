@@ -6,10 +6,10 @@ Source code for the service at http://ipa.sh.
 
 Can be used in terminal from any Linux host.
 
-    curl ipa.sh
+    $ curl ipa.sh
     99.99.99.91
 
-    curl 'ipa.sh/?v&pp'
+    $ curl 'ipa.sh/?v&pp'
     {'pretty json output'}
 
 Those are the only two arguments available. _v_ also provides more output in browser mode. 
