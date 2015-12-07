@@ -5,6 +5,7 @@ import user_agents
 from bottle import route, default_app, debug, request, run, response, template
 from bottle import TEMPLATE_PATH, static_file
 from pygeoip import GeoIP
+from dns import resolver, reversename
 
 config = RawConfigParser()
 config.readfp(open('ipash.cfg'))
@@ -60,6 +61,15 @@ def index():
         res_data['country'] = ip.country_name_by_addr(client_ip)
         res_data['city'] = ip.record_by_addr(client_ip)
         res_data['asn'] = ip.asn_by_addr(client_ip)
+    except Exception as e:
+        pass
+
+    try:
+        name = reversename.from_address(client_ip)
+        answers = resolver.query(name, 'PTR')
+        res_data['hostname'] = []
+        for answer in answers:
+            res_data['hostname'].append(str(answer))
     except Exception as e:
         pass
 
