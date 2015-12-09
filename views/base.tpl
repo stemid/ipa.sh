@@ -96,10 +96,10 @@
   <div class="section table">
     <div class="container">
       <div class="row">
-        <div class="one-half column">
+        <div class="one-third column">
           <h3 id="more">More info</h3>
         </div>
-        <div id="ip-info" class="one-half column table-content">
+        <div id="ip-info" class="two-thirds column table-content">
           {{!base}}
         </div>
       </div>
