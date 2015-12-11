@@ -5,6 +5,12 @@
     <th>IP-Address</th>
     <td>{{ua_info.get('ip')}}</td>
   </tr>
+  % if 'hostname' in ua_info.keys():
+  <tr>
+    <th>Hostname</th>
+    <td>{{ua_info.get('hostname')[0]}}</td>
+  </tr>
+  % end
   <tr>
     <th>User Agent</th>
     <td>{{ua_info.get('user_agent')}}</td>
