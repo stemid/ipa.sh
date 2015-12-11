@@ -15,7 +15,7 @@ TEMPLATE_PATH = ['./views', config.get('app', 'templates_path')]
 
 
 @route('/css/<filename>')
-def serve_static(filename):
+def serve_css(filename):
     return static_file(
         filename,
         root=config.get('app', 'static_path') + '/css'

@@ -35,8 +35,9 @@
   <div class="section hero">
     <div class="container">
       <div class="row">
-        <div class="column">
-          <h4 class="hero-heading">{{page_title}}</h4>
+        <div class="column hero-heading">
+          <h4>{{page_title}}</h4>
+          <a id="more-info" class="button" href="/?v#more">More info</a>
         </div>
       </div>
     </div>
@@ -56,7 +57,6 @@
     </div>
   </div>
   % end
-
 
 </body>
 </html>
