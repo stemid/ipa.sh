@@ -69,7 +69,7 @@ def index():
         answers = resolver.query(name, 'PTR')
         res_data['hostname'] = []
         for answer in answers:
-            res_data['hostname'].append(str(answer))
+            res_data['hostname'].append(str(answer).rstrip('.'))
     except Exception as e:
         pass
 
@@ -85,11 +85,12 @@ def index():
                 ) + '\r\n'
             return json.dumps(res_data)
 
-    return template('index', 
-                    ua_info=res_data,
-                    page_title='Your IP-address is: ' + res_data['ip'],
-                    verbose=verbose
-                   )
+    return template(
+        'index',
+        ua_info=res_data,
+        page_title='Your IP-address is: ' + res_data['ip'],
+        verbose=verbose
+    )
 
 if __name__ == '__main__':
     run(
