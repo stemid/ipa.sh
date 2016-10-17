@@ -1,5 +1,10 @@
+from __future__ import print_function
+
 import json
-from configparser import RawConfigParser
+try:
+    from configparser import RawConfigParser
+except ImportError:
+    from ConfigParser import RawConfigParser
 
 import user_agents
 from bottle import route, default_app, debug, request, run, response, template
@@ -11,7 +16,8 @@ config = RawConfigParser()
 config.readfp(open('ipash.cfg'))
 config.read(['ipash_local.cfg'])
 
-TEMPLATE_PATH = ['./templates', config.get('app', 'templates_path')]
+TEMPLATE_PATH.insert(0, './views')
+TEMPLATE_PATH.insert(0, config.get('app', 'templates_path'))
 
 
 @route('/css/<filename>')
@@ -91,6 +97,7 @@ def index():
         page_title='Your IP-address is: ' + res_data['ip'],
         verbose=verbose
     )
+
 
 if __name__ == '__main__':
     run(
