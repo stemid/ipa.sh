@@ -1,6 +1,6 @@
-bottle==0.12.9
-dnspython3==1.12.0
-gunicorn==19.4.1
-pygeoip==0.3.2
-ua-parser==0.5.1
-user-agents==1.0.1
+bottle
+dnspython
+gunicorn
+pygeoip
+ua-parser
+user-agents
