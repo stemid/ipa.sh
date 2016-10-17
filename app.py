@@ -11,7 +11,7 @@ config = RawConfigParser()
 config.readfp(open('ipash.cfg'))
 config.read(['ipash_local.cfg'])
 
-TEMPLATE_PATH = ['./views', config.get('app', 'templates_path')]
+TEMPLATE_PATH = ['./templates', config.get('app', 'templates_path')]
 
 
 @route('/css/<filename>')
